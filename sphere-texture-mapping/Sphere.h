@@ -4,6 +4,9 @@
 #include "Common.h"
 #include <memory>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 class Sphere
 {
 public:
@@ -29,6 +32,7 @@ private:
 
 	void createTetrahedron();
 	void createIcosahedron();
+	void createSphere(GLfloat radius, GLuint numOfSlices, GLuint numOfStacks);
 	void subdivideToSphere(GLfloat radius);
 	void setNormal();
 };
