@@ -8,7 +8,7 @@ Sphere::Sphere()
 
 void Sphere::initialise()
 {
-    createIcosahedron();
+    createTetrahedron();
 
     subdivideToSphere(1.5f);
     subdivideToSphere(1.5f);
@@ -44,7 +44,7 @@ void Sphere::createTetrahedron()
         positions[i] -= center;
     }
 
-    for (GLuint i = 0; i < positions.size(); i++) {
+    for (GLint i = 0; i < positions.size(); i++) {
         Vertex v;
         v.position = positions[i];
         v.normal = glm::normalize(v.position);
