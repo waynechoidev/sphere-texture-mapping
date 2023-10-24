@@ -7,6 +7,7 @@ layout (location = 2) in vec2 tex;
 out vec3 posWorld;
 out vec3 normalWorld;
 out vec2 TexCoord;
+out vec3 posModel;
 
 layout(std140) uniform Vertices
 {
@@ -24,4 +25,5 @@ void main()
 	// ignore scale
 	normalWorld = normalize(mat3(transpose(inverse(model))) * norm);
 	TexCoord = tex;
+	posModel = pos;
 }

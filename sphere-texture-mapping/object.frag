@@ -3,6 +3,7 @@
 in vec2 TexCoord;
 in vec3 posWorld;
 in vec3 normalWorld;
+in vec3 posModel;
 
 out vec4 colour;
 
@@ -135,5 +136,9 @@ void main()
     
     res += computeSpotLight(posWorld, normalWorld, toEye) * light.isSpot;
 
-	colour = useTexture ? vec4(res, 1.0) * texture(theTexture, TexCoord) : vec4(res, 1.0);
+    vec2 uv;
+    uv.x = 1.0 - (atan(posModel.z, posModel.x) / (3.141592 * 2.0));
+    uv.y = acos(posModel.y / 1.5) / 3.141592;
+
+	colour = useTexture ? vec4(res, 1.0) * texture(theTexture, uv) : vec4(res, 1.0);
 }

@@ -8,13 +8,13 @@ Sphere::Sphere()
 
 void Sphere::initialise()
 {
-    createSphere(1.5f, 20, 20);
-    //createIcosahedron();
+    //createSphere(1.5f, 20, 20);
+    createIcosahedron();
 
-    //subdivideToSphere(1.5f);
-    //subdivideToSphere(1.5f);
-    //subdivideToSphere(1.5f);
-    //subdivideToSphere(1.5f);
+    subdivideToSphere(1.5f);
+    subdivideToSphere(1.5f);
+    subdivideToSphere(1.5f);
+    subdivideToSphere(1.5f);
 
     setNormal();
 
