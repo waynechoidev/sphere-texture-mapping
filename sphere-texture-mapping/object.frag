@@ -7,6 +7,8 @@ in vec3 posModel;
 
 out vec4 colour;
 
+const float PI = 3.14159265359;
+
 layout(std140) uniform Fragment
 {
     vec3 viewPosition; // 12    4
@@ -65,7 +67,7 @@ vec3 blinnPhong(vec3 lightStrength, vec3 lightVec, vec3 normal, vec3 toEye)
 
 vec3 computeDirectionalLight(vec3 normal, vec3 toEye)
 {
-    vec3 lightVec = light.direction;
+    vec3 lightVec = -light.direction;
     
     float ndotl = max(dot(lightVec, normal), 0.0f);
     vec3 lightStrength = vec3(light.strength) * ndotl;
@@ -117,7 +119,7 @@ vec3 computeSpotLight(vec3 pos, vec3 normal, vec3 toEye)
         float att = calcAttenuation(d, light.fallOffStart, light.fallOffEnd);
         lightStrength *= att;
         
-        float spotFactor = pow(max(dot(lightVec, light.direction), 0.0f), light.spotPower);
+        float spotFactor = pow(max(-dot(lightVec, light.direction), 0.0f), light.spotPower);
         lightStrength *= spotFactor;
         
         return blinnPhong(lightStrength, lightVec, normal, toEye);
@@ -137,8 +139,8 @@ void main()
     res += computeSpotLight(posWorld, normalWorld, toEye) * light.isSpot;
 
     vec2 uv;
-    uv.x = 1.0 - (atan(posModel.z, posModel.x) / (3.141592 * 2.0));
-    uv.y = acos(posModel.y / 1.5) / 3.141592;
+    uv.x = 1.0 - (atan(posModel.z, posModel.x) / (PI * 2.0));
+    uv.y = acos(posModel.y / 1.5) / PI;
 
 	colour = useTexture ? vec4(res, 1.0) * texture(theTexture, uv) : vec4(res, 1.0);
 }
